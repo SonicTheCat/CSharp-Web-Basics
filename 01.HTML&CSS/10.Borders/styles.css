@@ -1,0 +1,32 @@
+#redBorder{
+    border: red solid;
+    border-width: 2px 100px 10px 100px;
+    width: 50%;
+    font-size: 100%;
+    border-radius: 10px;
+    background-color: #73AD21
+}
+
+#greenBorder{
+    border: double thick green;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #dddddd
+}
+
+#blueBorder{
+    border-style: dotted;
+    border-top-color:blue;
+    border-bottom-color: pink;
+    border-width: medium; 
+    border-top-style: solid
+
+}
+
+#spana{
+    color: red
+}
+
+.green-Span{
+    color: green
+}

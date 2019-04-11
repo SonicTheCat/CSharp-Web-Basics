@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <script src="../package-lock.json"></script>
+    <script defer src="app.js"></script>
+</head>
+<body onload="calc()">
+    <h1>Contact Us</h1>
+    <form action="mypost.csharp" id="formata">
+    FirstName:<br>
+    <input type="text" name="firstName" id="firstName" placeholder="John">
+    <br> <br>
+    LastName: <br>
+    <input type="text" name="lastName" id="lastName" placeholder="Smith">
+    <br> <br>
+    Male: <input type="radio" name="sex" id="male">
+    Female: <input type="radio" name="sex" id="female">
+    <br>    <br> 
+    What transport do you use?
+    <br>
+    Car
+    <input type="checkbox" name="car">
+    <br>
+    Bus
+    <input type="checkbox" name="bus">
+    <br>
+    Tram 
+    <input type="checkbox" name="subway">
+    <br>
+    Where are you from? 
+    <br>
+    <select>
+        <option selected='selected' disabled>Choose Country</option>
+        <option>Bulgaria</option>
+        <option>USA</option>
+        <option value="">Russia</option>
+    </select>
+    <br><br>
+    <input type="submit" value="Pusni">
+    </form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+div.first{
+    border-style: dotted;
+    border-radius: 7px; 
+    border-color: red;
+    margin: 10px; 
+}
+
+div.second{
+    border-style: dashed;
+    border-radius: 7px; 
+    border-color: blue;
+    margin: 50px
+}
+
+div.third{
+    border-style: solid; 
+    border-radius: 7px; 
+    border-color: green; 
+    margin: 50px; 
+}
+
+#nestedP{
+    text-align: center;
+    color: orangered; 
+    padding: 20px
+}
