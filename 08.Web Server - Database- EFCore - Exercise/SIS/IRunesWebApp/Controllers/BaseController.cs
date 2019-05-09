@@ -78,7 +78,7 @@
         {
             return request.Session.ContainsParameter("username"); 
         }
-
+        
         public void SignInUser(string username, IHttpResponse response, IHttpRequest request)
         {
             request.Session.AddParameter("username", username);

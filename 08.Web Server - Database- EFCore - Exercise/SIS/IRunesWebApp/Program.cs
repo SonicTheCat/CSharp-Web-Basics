@@ -5,7 +5,7 @@
     using SIS.WebServer;
     using SIS.WebServer.Results;
     using SIS.WebServer.Routing;
-    
+
     public class Program
     {
         public static void Main()
@@ -13,12 +13,13 @@
             ServerRoutingTable serverRoutingTable = new ServerRoutingTable();
 
             InitializeGetMethods(serverRoutingTable);
-            InitializePostMethods(serverRoutingTable); 
-            
+            InitializePostMethods(serverRoutingTable);
+
             Server server = new Server(80, serverRoutingTable);
             server.Run();
         }
 
+        //POST
         private static void InitializePostMethods(ServerRoutingTable serverRoutingTable)
         {
             serverRoutingTable.Routes[HttpRequestMethod.Post]["/users/register"] =
@@ -26,8 +27,12 @@
 
             serverRoutingTable.Routes[HttpRequestMethod.Post]["/users/login"] =
              request => new UsersController().LoginPostRequest(request);
+
+            serverRoutingTable.Routes[HttpRequestMethod.Post]["/albums/create"] =
+             request => new AlbumsController().CreatePostRequest(request);
         }
 
+        //GET
         private static void InitializeGetMethods(ServerRoutingTable serverRoutingTable)
         {
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/"] =
@@ -40,6 +45,18 @@
 
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/users/register"] =
               request => new UsersController().Register(request);
+
+            serverRoutingTable.Routes[HttpRequestMethod.Get]["/albums/all"] =
+             request => new AlbumsController().All(request);
+
+            serverRoutingTable.Routes[HttpRequestMethod.Get]["/albums/create"] =
+             request => new AlbumsController().Create(request);
+
+            serverRoutingTable.Routes[HttpRequestMethod.Get]["/albums/details"] =
+            request => new AlbumsController().Details(request);
+
+            serverRoutingTable.Routes[HttpRequestMethod.Get]["/tracks/create"] =
+           request => new TracksController().Create(request);
         }
     }
 }

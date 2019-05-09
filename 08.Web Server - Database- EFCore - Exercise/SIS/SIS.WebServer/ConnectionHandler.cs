@@ -39,7 +39,7 @@ namespace SIS.WebServer
                     break; 
                 }
 
-                var bytesAsString = Encoding.UTF8.GetString(data.Array, 0, numberOfBytesRead);
+                var bytesAsString = Encoding.UTF8.GetString(data.Array, 0, numberOfBytesRead);               
                 result.Append(bytesAsString);
 
                 if (numberOfBytesRead < 1023)

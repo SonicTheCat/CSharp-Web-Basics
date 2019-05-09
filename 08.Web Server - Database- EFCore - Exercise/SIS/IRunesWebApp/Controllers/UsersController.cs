@@ -12,6 +12,7 @@
     using SIS.WebServer.Results;
     using System;
     using System.Linq;
+    using System.Web;
 
     public class UsersController : BaseController
     {
@@ -66,7 +67,7 @@
             var username = request.FormData["username"].ToString().Trim();
             var password = request.FormData["password"].ToString();
             var confirmedPassword = request.FormData["confirmPassword"].ToString();
-            var email = request.FormData["email"].ToString();
+            var email = HttpUtility.UrlDecode(request.FormData["email"].ToString());
 
             if (!UserValidator.IsUsernameValid(username, this.Db))
             {

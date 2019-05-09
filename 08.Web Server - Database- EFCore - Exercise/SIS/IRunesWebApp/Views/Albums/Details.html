@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>IRunes</h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/albums/all">All Albums</a></li>
+        <li><a href="/users/logout">Logout</a></li>
+    </ul>
+    <hr />
+    <img src="{{albumCoverUrl}}" alt="album cover" height="100" width="100">
+    <p>Name: {{name}}</p>
+    <p>Price: {{price}}</p><br />
+    <strong>Tracks</strong>
+    <hr />
+    <p><a href="/tracks/create?albumId={{albumId}}">Create Track</a></p>
+    <hr />
+    {{tracks}}
+    <hr />
+    <p><a href="/albums/all">Back To All</a></p>
+    <hr />
+    <p>CopyRight &copy; Santy Design Studios. All rights reserved.</p>
+</body>
+</html>
