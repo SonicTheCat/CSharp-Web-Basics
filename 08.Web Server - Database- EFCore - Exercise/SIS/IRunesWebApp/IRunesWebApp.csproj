@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.entityframeworkcore.design" Version="2.2.4" />
+    <PackageReference Include="microsoft.entityframeworkcore.proxies" Version="2.2.4" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.2.4" />
+    <PackageReference Include="microsoft.entityframeworkcore.Tools" Version="2.2.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SIS.HTTP\SIS.HTTP.csproj" />
+    <ProjectReference Include="..\SIS.WebServer\SIS.WebServer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Views\Home\Index.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
