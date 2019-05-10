@@ -88,5 +88,17 @@
             };
             response.Cookies.Add(cookie);
         }
+
+        public void SignOutUser(IHttpRequest request, IHttpResponse response)
+        {
+            request.Session.ClearParameters();
+            var cookie = request.Cookies.GetCookie(GlobalConstants.AuthCookieKeyName);
+
+            if (cookie != null)
+            {
+                cookie.Delete();
+                response.AddCookie(cookie); 
+            }
+        }
     }
 }

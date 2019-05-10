@@ -105,6 +105,14 @@
             return PackUpResponse(user.Username, request);
         }
 
+        public IHttpResponse Logout(IHttpRequest request)
+        {
+            var response = new RedirectResult("/"); 
+            this.SignOutUser(request, response);
+
+            return response; 
+        }
+
         private IHttpResponse PackUpResponse(string username, IHttpRequest request)
         {
             var response = new RedirectResult("/");

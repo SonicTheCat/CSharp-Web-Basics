@@ -63,6 +63,9 @@
 
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/tracks/details"] =
                 request => new TracksController().Details(request);
+
+            serverRoutingTable.Routes[HttpRequestMethod.Get]["/users/logout"] =
+               request => new UsersController().Logout(request);
         }
     }
 }
