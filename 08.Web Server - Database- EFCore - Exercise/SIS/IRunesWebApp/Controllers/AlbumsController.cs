@@ -24,7 +24,7 @@
             var content = "<ol>";
             foreach (var album in albums)
             {
-                content += $"<li><a href=\"/albums/details?id={album.Id}\">" + album.Name + "</a></li>";
+                content += $"<li><a href=\"/albums/details?albumId={album.Id}\">" + album.Name + "</a></li>";
             }
             content += "</ol>";
 
@@ -91,7 +91,7 @@
                 return new RedirectResult("/users/login");
             }
             
-            var id = request.QueryData["id"].ToString();
+            var id = request.QueryData["albumId"].ToString();
 
             var album = this.Db.Albums.FirstOrDefault(x => x.Id == id);
             if (album == null)
@@ -107,10 +107,10 @@
             var tracks = album.Tracks.ToList();
 
             var tracksContent = "<ul>";
-            var counter = 1; 
+            var rowCounter = 1; 
             foreach (var track in tracks)
             {
-                tracksContent += $"<li>{counter++}. <a href=\"/tracks/details?id={track.TrackId}\">" + track.Track.Name + "</a></li>";
+                tracksContent += $"<li>{rowCounter++}. <a href=\"/tracks/details?albumId={album.Id}&trackId={track.TrackId}\">" + track.Track.Name + "</a></li>";
             }
             tracksContent += "</ul>";
 

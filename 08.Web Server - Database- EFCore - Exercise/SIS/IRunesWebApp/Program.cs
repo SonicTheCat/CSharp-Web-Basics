@@ -39,27 +39,30 @@
         private static void InitializeGetMethods(ServerRoutingTable serverRoutingTable)
         {
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/"] =
-               request => new HomeController().Index(request);
+                request => new HomeController().Index(request);
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/home/index"] =
                 request => new RedirectResult("/");
 
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/users/login"] =
-              request => new UsersController().Login(request);
+                request => new UsersController().Login(request);
 
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/users/register"] =
-              request => new UsersController().Register(request);
+                request => new UsersController().Register(request);
 
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/albums/all"] =
-             request => new AlbumsController().All(request);
+                request => new AlbumsController().All(request);
 
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/albums/create"] =
-             request => new AlbumsController().Create(request);
+                request => new AlbumsController().Create(request);
 
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/albums/details"] =
-            request => new AlbumsController().Details(request);
+                request => new AlbumsController().Details(request);
 
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/tracks/create"] =
-           request => new TracksController().Create(request);
+                request => new TracksController().Create(request);
+
+            serverRoutingTable.Routes[HttpRequestMethod.Get]["/tracks/details"] =
+                request => new TracksController().Details(request);
         }
     }
 }

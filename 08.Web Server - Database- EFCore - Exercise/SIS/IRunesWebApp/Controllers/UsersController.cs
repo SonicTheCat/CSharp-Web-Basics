@@ -1,11 +1,9 @@
 ﻿namespace IRunesWebApp.Controllers
 {
-    using IRunesWebApp.Common;
     using IRunesWebApp.Common.Validators;
     using IRunesWebApp.Models;
     using IRunesWebApp.Services;
     using IRunesWebApp.Services.Contracts;
-    using SIS.HTTP.Cookies;
     using SIS.HTTP.Enums;
     using SIS.HTTP.Requests.Contracts;
     using SIS.HTTP.Responses.Contracts;
