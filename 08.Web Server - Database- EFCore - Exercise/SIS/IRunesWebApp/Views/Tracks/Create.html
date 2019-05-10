@@ -6,6 +6,24 @@
     <title></title>
 </head>
 <body>
-
+    <h1>IRunes</h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/albums/all">All Albums</a></li>
+        <li><a href="/users/logout">Logout</a></li>
+    </ul>
+    <hr />
+    <h1>Create Track</h1>
+    <hr />
+    <form action="/tracks/create?albumId={{albumId}}" method="post">
+        Name<input name="name" type="text" placeholder="Name..." /><br />
+        Link<input name="link" type="url" placeholder="Link..." /><br />
+        Price<input name="price" type="number" placeholder="Price..." /><br />
+        <input name="createTrackBtn" type="submit" value="Create" />
+    </form>
+    <hr />
+    <p><a href="/albums/details?id={{albumId}}">Back To Album</a></p>
+    <hr />
+    <p>CopyRight &copy; Santy Design Studios. All rights reserved.</p>
 </body>
 </html>

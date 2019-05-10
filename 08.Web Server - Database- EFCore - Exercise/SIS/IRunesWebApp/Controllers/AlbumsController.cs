@@ -50,7 +50,7 @@
             return this.View();
         }
 
-        public IHttpResponse CreatePostRequest(IHttpRequest request)
+        public IHttpResponse CreateAlbumPostRequest(IHttpRequest request)
         {
             var albumName = HttpUtility.UrlDecode(request.FormData["name"].ToString().Trim());
             var coverUrl = HttpUtility.UrlDecode(request.FormData["cover"].ToString());
@@ -110,7 +110,7 @@
             var counter = 1; 
             foreach (var track in tracks)
             {
-                tracksContent += $"<li>{counter++}<a href=\"/tracks/details?id={track.TrackId}\">" + track.Track.Name + "</a></li>";
+                tracksContent += $"<li>{counter++}. <a href=\"/tracks/details?id={track.TrackId}\">" + track.Track.Name + "</a></li>";
             }
             tracksContent += "</ul>";
 

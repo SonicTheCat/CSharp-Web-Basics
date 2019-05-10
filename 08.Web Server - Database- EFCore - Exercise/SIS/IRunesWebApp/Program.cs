@@ -29,7 +29,10 @@
              request => new UsersController().LoginPostRequest(request);
 
             serverRoutingTable.Routes[HttpRequestMethod.Post]["/albums/create"] =
-             request => new AlbumsController().CreatePostRequest(request);
+             request => new AlbumsController().CreateAlbumPostRequest(request);
+
+            serverRoutingTable.Routes[HttpRequestMethod.Post]["/tracks/create"] =
+             request => new TracksController().CreateTrackPostRequest(request);
         }
 
         //GET
