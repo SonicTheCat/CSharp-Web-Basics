@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{F58AE83E-A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeWebApp", "CakeWebApp\CakeWebApp.csproj", "{BAA39833-14EC-4603-A1F8-C057BF386D17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRunesWebApp", "IRunesWebApp\IRunesWebApp.csproj", "{2AEFB45C-70C1-4CA9-89A8-7D7CFF2D5D3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IRunesWebApp", "IRunesWebApp\IRunesWebApp.csproj", "{2AEFB45C-70C1-4CA9-89A8-7D7CFF2D5D3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
