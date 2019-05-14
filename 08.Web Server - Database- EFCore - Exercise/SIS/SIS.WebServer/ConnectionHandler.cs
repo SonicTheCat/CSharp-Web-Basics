@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SIS.HTTP.Common;
@@ -145,8 +144,7 @@ namespace SIS.WebServer
 
         private string SetRequestSession(IHttpRequest httpRequest)
         {
-            string sessionId = null;
-
+            string sessionId;
             if (httpRequest.Cookies.ContainsCookie(HttpSessionStorage.SessionCookieKey))
             {
                 var cookie = httpRequest.Cookies.GetCookie(HttpSessionStorage.SessionCookieKey);

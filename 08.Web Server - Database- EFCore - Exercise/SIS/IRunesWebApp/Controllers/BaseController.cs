@@ -38,6 +38,8 @@
 
         protected IDictionary<string, string> ViewBag { get; set; }
 
+        protected bool IsLoggedIn { get; set; }
+
         private string GetCurrentControllerName()
         {
             return this.GetType().Name.Replace(ControllerNameAsString, string.Empty);
@@ -70,12 +72,48 @@
                 }
             }
 
-            return new HtmlResult(content, HttpResponseStatusCode.Ok);
+            this.ViewBag["loggedOut"] = "inline";
+            this.ViewBag["loggedIn"] = "none";
+
+            if (this.IsLoggedIn)
+            {
+                this.ViewBag["loggedOut"] = "none"; 
+                this.ViewBag["loggedIn"] = "inline"; 
+            }
+
+            this.ViewBag["renderBody"] = content; 
+            
+            var layoutViewPath = RootDirectoryPath +
+                ViewsFolderName +
+                Separator +                         
+                "_Layout" +
+                FileExtension;
+
+            string layoutContent = File.ReadAllText(layoutViewPath);
+
+            foreach (var key in this.ViewBag.Keys)
+            {
+                if (layoutContent.Contains($"{{{key}}}"))
+                {
+                    layoutContent = layoutContent.Replace($"{{{{{key}}}}}", this.ViewBag[key]);
+                }
+            }
+
+            return new HtmlResult(layoutContent, HttpResponseStatusCode.Ok);
         }
 
         public bool IsAuthenticated(IHttpRequest request)
         {
-            return request.Session.ContainsParameter("username"); 
+            if (request.Session.ContainsParameter("username"))
+            {
+                this.IsLoggedIn = true;
+            }
+            else
+            {
+                this.IsLoggedIn = false; 
+            }
+
+            return this.IsLoggedIn; 
         }
         
         public void SignInUser(string username, IHttpResponse response, IHttpRequest request)
