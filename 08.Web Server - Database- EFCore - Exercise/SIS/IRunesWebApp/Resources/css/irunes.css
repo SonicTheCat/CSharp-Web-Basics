@@ -1,0 +1,45 @@
+﻿.navbar, .jumbotron {
+    background-color: forestgreen;
+    color: white;
+}
+
+    .jumbotron a {
+        color: orange;
+    }
+
+#navbarNavAltMarkup a, #navbarNavAltMarkupSecond a {
+    color: white;
+}
+
+#navbar-body-separator {
+    margin-bottom: 15px;
+    margin-top: 7px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: green;
+}
+
+.welcome-irunes {
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-bottom-width: 2px;
+    margin-bottom: 15px
+}
+
+footer {
+    border-top-style: solid;
+    border-top-color: forestgreen;
+    border-top-width: 2px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+span {
+    color: orange;
+}
+
+.custom-bottom-border{
+    border-bottom-style:solid;
+    border-bottom-color:forestgreen;
+    border-bottom-width: 2px;
+}
