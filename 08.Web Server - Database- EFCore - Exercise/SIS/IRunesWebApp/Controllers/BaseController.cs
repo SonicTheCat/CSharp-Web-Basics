@@ -29,7 +29,7 @@
         {
             this.Db = new IRunesDbContext();
             this.UserCookieService = new UserCookieService();
-            this.ViewBag = new Dictionary<string, string>(); 
+            this.ViewBag = new Dictionary<string, string>();
         }
 
         protected IRunesDbContext Db { get; }
@@ -40,64 +40,20 @@
 
         protected bool IsLoggedIn { get; set; }
 
-        private string GetCurrentControllerName()
-        {
-            return this.GetType().Name.Replace(ControllerNameAsString, string.Empty);
-        }
-
         public IHttpResponse View([CallerMemberName] string viewName = "")
         {
-            //find the view that has to be rendered
-            var path = RootDirectoryPath +
-                ViewsFolderName +
-                Separator +
-                this.GetCurrentControllerName() +
-                Separator +
-                viewName +
-                FileExtension;
+            string path = GetCurrentViewPath(viewName);
 
             if (!File.Exists(path))
             {
                 return new BadRequestResult($"View {viewName} does not exist!", HttpResponseStatusCode.NotFound);
             }
 
-            string content = File.ReadAllText(path);
-            
-            //insert username in html file
-            foreach (var key in this.ViewBag.Keys)
-            {
-                if (content.Contains($"{{{key}}}"))
-                {
-                    content = content.Replace($"{{{{{key}}}}}", this.ViewBag[key]); 
-                }
-            }
+            string content = ReplacePlaceholdersInView(path);
 
-            this.ViewBag["loggedOut"] = "inline";
-            this.ViewBag["loggedIn"] = "none";
+            this.ViewBag["renderBody"] = content;
 
-            if (this.IsLoggedIn)
-            {
-                this.ViewBag["loggedOut"] = "none"; 
-                this.ViewBag["loggedIn"] = "inline"; 
-            }
-
-            this.ViewBag["renderBody"] = content; 
-            
-            var layoutViewPath = RootDirectoryPath +
-                ViewsFolderName +
-                Separator +                         
-                "_Layout" +
-                FileExtension;
-
-            string layoutContent = File.ReadAllText(layoutViewPath);
-
-            foreach (var key in this.ViewBag.Keys)
-            {
-                if (layoutContent.Contains($"{{{key}}}"))
-                {
-                    layoutContent = layoutContent.Replace($"{{{{{key}}}}}", this.ViewBag[key]);
-                }
-            }
+            var layoutContent = ReplacePlaceholdersInView(GetLayoutPath());
 
             return new HtmlResult(layoutContent, HttpResponseStatusCode.Ok);
         }
@@ -106,16 +62,20 @@
         {
             if (request.Session.ContainsParameter("username"))
             {
+                this.ViewBag["loggedOut"] = "none";
+                this.ViewBag["loggedIn"] = "inline";
                 this.IsLoggedIn = true;
             }
             else
             {
-                this.IsLoggedIn = false; 
+                this.ViewBag["loggedOut"] = "inline";
+                this.ViewBag["loggedIn"] = "none";
+                this.IsLoggedIn = false;
             }
 
-            return this.IsLoggedIn; 
+            return this.IsLoggedIn;
         }
-        
+
         public void SignInUser(string username, IHttpResponse response, IHttpRequest request)
         {
             request.Session.AddParameter("username", username);
@@ -135,8 +95,48 @@
             if (cookie != null)
             {
                 cookie.Delete();
-                response.AddCookie(cookie); 
+                response.AddCookie(cookie);
             }
+        }
+
+        private string GetCurrentControllerName()
+        {
+            return this.GetType().Name.Replace(ControllerNameAsString, string.Empty);
+        }
+
+        private string GetCurrentViewPath(string viewName)
+        {
+            //find the view that has to be rendered
+            return RootDirectoryPath +
+                ViewsFolderName +
+                Separator +
+                this.GetCurrentControllerName() +
+                Separator +
+                viewName +
+                FileExtension;
+        }
+
+        private static string GetLayoutPath()
+        {
+            return RootDirectoryPath +
+                ViewsFolderName +
+                Separator +
+                "_Layout" +
+                FileExtension;
+        }
+
+        private string ReplacePlaceholdersInView(string path)
+        {
+            string content = File.ReadAllText(path);
+
+            foreach (var key in this.ViewBag.Keys)
+            {
+                if (content.Contains($"{{{key}}}"))
+                {
+                    content = content.Replace($"{{{{{key}}}}}", this.ViewBag[key]);
+                }
+            }
+            return content;
         }
     }
 }
