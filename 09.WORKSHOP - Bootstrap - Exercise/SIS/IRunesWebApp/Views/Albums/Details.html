@@ -1,0 +1,14 @@
+﻿<div class="container row">
+    <div class="text-center">
+        <img src="{{albumCoverUrl}}" height="350" width="350" class="rounded" alt="...">
+        <p>Name: {{name}}</p>
+        <p>Price: {{price}}</p>
+        <a class="btn btn-success btn-sm float-left" href="/tracks/create?albumId={{albumId}}">Create Track</a>
+        <a class="btn btn-success btn-sm float-right" href="/albums/all">Back To All</a>
+    </div>
+    <div class="offset-md-2">
+        <strong>Tracks</strong>
+        {{tracks}}
+    </div>
+    <hr />
+</div>

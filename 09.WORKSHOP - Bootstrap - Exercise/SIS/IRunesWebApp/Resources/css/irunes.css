@@ -1,0 +1,73 @@
+﻿.navbar, .jumbotron {
+    background-color: forestgreen;
+    color: white;
+}
+
+    .jumbotron a {
+        color: orange;
+    }
+
+#navbarNavAltMarkup a, #navbarNavAltMarkupSecond a {
+    color: white;
+}
+
+#navbar-body-separator {
+    margin-bottom: 15px;
+    margin-top: 7px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: forestgreen;
+}
+
+.welcome-irunes {
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-bottom-width: 2px;
+    margin-bottom: 15px
+}
+
+footer {
+    text-align: center;
+}
+
+span {
+    color: orange;
+}
+
+#create-album-div {
+    border-top-style: solid;
+    border-top-color: forestgreen;
+    border-top-width: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: forestgreen;
+    border-bottom-width: 3px;
+}
+
+#create-album-div p{
+    text-align:left;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+#albums-list{
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+#myHr {
+    border: solid;
+    border-color: forestgreen;
+    border-width: 1.5px;
+    margin-top:15px;
+}
+
+#video-frame {
+    border-top-style: solid;
+    border-top-color: forestgreen;
+    border-top-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: forestgreen;
+    border-bottom-width: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;   
+}

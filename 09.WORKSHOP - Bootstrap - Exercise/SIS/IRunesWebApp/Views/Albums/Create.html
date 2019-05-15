@@ -1,0 +1,21 @@
+﻿<div class="col-md-6 offset-md-3">
+    <div class="text-success text-center">
+        <h1>Create Album</h1>
+    </div>
+    <hr id="myHr" />
+    <form method="post" action="/albums/create">
+        <div class="form-group ">
+            <label for="exampleFormControlInput1">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Name...">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Cover</label>
+            <input type="url" class="form-control" name="cover" placeholder="Cover...">
+        </div>
+        <hr id="myHr" />
+        <div class="form-group">
+            <input type="submit" class="btn btn-success btn-sm" value="Create" />
+            <a href="/albums/all" class="btn btn-success btn-sm float-right">Back To All</a>
+        </div>
+    </form>
+</div>
