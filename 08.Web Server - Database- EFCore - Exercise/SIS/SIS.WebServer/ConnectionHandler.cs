@@ -1,34 +1,28 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using SIS.HTTP.Common;
 using SIS.HTTP.Cookies;
-using SIS.HTTP.Enums;
 using SIS.HTTP.Requests;
 using SIS.HTTP.Requests.Contracts;
-using SIS.HTTP.Responses;
 using SIS.HTTP.Responses.Contracts;
 using SIS.HTTP.Sessions;
-using SIS.WebServer.Results;
-using SIS.WebServer.Routing;
+using SIS.WebServer.Api.Contracts;
 
 namespace SIS.WebServer
 {
     public class ConnectionHandler
     {
-        private const string RootDirectoryRelativePath = "../../..";
+       // private const string RootDirectoryRelativePath = "../../..";
 
         private readonly Socket client;
-        private readonly ServerRoutingTable serverRoutingTable;
+        private readonly IHttpHandler httpHandler;
         // private readonly HttpSessionStorage sessionStorage; 
 
-        public ConnectionHandler(Socket client, ServerRoutingTable serverRoutingTable)
+        public ConnectionHandler(Socket client, IHttpHandler httpHandler)
         {
             this.client = client;
-            this.serverRoutingTable = serverRoutingTable;
+            this.httpHandler = httpHandler;
         }
 
         private async Task<IHttpRequest> ReadRequest()
@@ -62,62 +56,6 @@ namespace SIS.WebServer
             return new HttpRequest(result.ToString());
         }
 
-        private IHttpResponse HandleRequest(IHttpRequest httpRequest)
-        {
-            var isResourceRequest = this.IsResourceRequest(httpRequest);
-            if (isResourceRequest)
-            {
-                return this.HandleRequestResponse(httpRequest.Path);
-            }
-
-            if (!this.serverRoutingTable.Routes.ContainsKey(httpRequest.RequestMethod)
-                || !this.serverRoutingTable.Routes[httpRequest.RequestMethod].ContainsKey(httpRequest.Path.ToLower()))
-            {
-                return new HttpResponse(HttpResponseStatusCode.NotFound);
-            }
-
-            var func = this.serverRoutingTable.Routes[httpRequest.RequestMethod][httpRequest.Path];
-            return func.Invoke(httpRequest);
-        }
-
-        private IHttpResponse HandleRequestResponse(string path)
-        {
-            var indexOfStartNameOfResource = path.LastIndexOf('/');
-            var extension = GetResourceExtension(path);
-
-            var resourceName = path.Substring(indexOfStartNameOfResource);
-
-            var resourcePath = RootDirectoryRelativePath +
-                "/Resources" +
-                $"/{extension.Substring(1)}" +
-                resourceName;
-
-            if (!File.Exists(resourcePath))
-            {
-                return new HttpResponse(HttpResponseStatusCode.NotFound);
-            }
-
-            var fileContent = File.ReadAllBytes(resourcePath);
-            
-            return new InlineResourceResult(fileContent, HttpResponseStatusCode.Ok);
-        }
-
-        private bool IsResourceRequest(IHttpRequest httpRequest)
-        {
-            var requestPath = httpRequest.Path;
-            if (requestPath.Contains("."))
-            {
-                var extension = GetResourceExtension(requestPath);
-                return GlobalConstants.ResourceExtensions.Contains(extension);
-            }
-            return false;
-        }
-
-        private string GetResourceExtension(string path)
-        {
-            return path.Substring(path.LastIndexOf("."));
-        }
-
         private async Task PrepareResponse(IHttpResponse httpResponse)
         {
             byte[] byteSegments = httpResponse.GetBytes();
@@ -132,7 +70,7 @@ namespace SIS.WebServer
             {
                 var sessionId = this.SetRequestSession(httpRequest);
 
-                var httpResponse = this.HandleRequest(httpRequest);
+                var httpResponse = this.httpHandler.Handle(httpRequest);
 
                 this.SetResponseSession(httpResponse, sessionId);
 
