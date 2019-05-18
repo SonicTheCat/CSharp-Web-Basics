@@ -1,10 +1,5 @@
-﻿<div class="container text-center">
-    <div class="font-weight-bold">
-        Track Name: {{name}}<br />
-        Track Price: ${{price}}
-    </div>
-    <div class="embed-responsive embed-responsive-16by9 col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <iframe id="video-frame" class="embed-responsive-item" src="{{link}}" allowfullscreen></iframe>
-    </div>
-    <a class="btn btn-success btn-sm m-3" href="/albums/details?albumId={{albumId}}">Back To Album</a>
-</div>
+﻿<embed width="420" height="315" src="{{link}}">
+<p>Name: {{name}}</p>
+<p>Price: {{price}}</p><br />
+<hr />
+<p><a href="/albums/details?albumId={{albumId}}">Back To Album</a></p>

@@ -50,7 +50,9 @@
             }
 
             string content = ReplacePlaceholdersInView(path);
+
             this.ViewBag["renderBody"] = content;
+
             var layoutContent = ReplacePlaceholdersInView(GetLayoutPath());
 
             return new HtmlResult(layoutContent, HttpResponseStatusCode.Ok);
