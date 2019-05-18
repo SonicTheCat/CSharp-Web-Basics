@@ -12,7 +12,7 @@
 
         public static string GetViewFullQualifiedName(string controller, string viewName)
         {
-            return $"{MvcContext.Get.ViewsFolder}\\{controller}\\{viewName}"; 
+            return $"{MvcContext.Get.ViewsFolder}\\{controller}\\{viewName}.html"; 
         }
     }
 }
