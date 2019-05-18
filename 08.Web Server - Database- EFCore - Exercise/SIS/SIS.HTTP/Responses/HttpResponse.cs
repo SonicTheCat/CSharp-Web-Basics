@@ -54,6 +54,7 @@
                 .AppendLine($"{GlobalConstants.HttpOneProtocolFragment} {this.StatusCode.GetResponseLine()}")
                 .AppendLine(this.Headers.ToString()); 
 
+
             if (this.Cookies.HasCookies())
             {
                 //TODO: must be in foreach 

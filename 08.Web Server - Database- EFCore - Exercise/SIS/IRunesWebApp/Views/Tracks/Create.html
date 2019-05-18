@@ -1,10 +1,27 @@
-﻿<h1>Create Track</h1>
-<hr />
-<form action="/tracks/create?albumId={{albumId}}" method="post">
-    Name<input name="name" type="text" placeholder="Name..." /><br />
-    Link<input name="link" type="url" placeholder="Link..." /><br />
-    Price<input name="price" type="number" placeholder="Price..." /><br />
-    <input name="createTrackBtn" type="submit" value="Create" />
-</form>
-<hr />
-<p><a href="/albums/details?albumId={{albumId}}">Back To Album</a></p>
+﻿<div class="col-md-6 offset-md-3">
+    <div class="text-success text-center">
+        <h1>Create Track</h1>
+    </div>
+    <hr id="myHr" />
+    <form method="post" action="/tracks/create?albumId={{albumId}}">
+        <div class="form-group ">
+            <label for="exampleFormControlInput1">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Name...">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="exampleFormControlInput1">Url</label>
+                <input type="url" class="form-control" name="link" placeholder="Link...">
+            </div>
+            <div class="form-group col-md-5 offset-md-2">
+                <label for="exampleFormControlInput1">Price</label>
+                <input type="number" class="form-control" min="0.1" step="0.1" name="price" placeholder="Price...">
+            </div>
+        </div>
+        <hr id="myHr" />
+        <div class="form-group">
+            <input type="submit" class="btn btn-success btn-sm" value="Create" />
+            <a href="/albums/details?albumId={{albumId}}" class="btn btn-success btn-sm float-right">Back To Album</a>
+        </div>
+    </form>
+</div>

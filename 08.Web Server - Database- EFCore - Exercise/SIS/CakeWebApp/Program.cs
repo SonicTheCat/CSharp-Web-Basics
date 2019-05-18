@@ -1,8 +1,6 @@
 ﻿using CakeWebApp.Controllers;
 using SIS.HTTP.Enums;
 using SIS.WebServer;
-using SIS.WebServer.Api;
-using SIS.WebServer.Api.Contracts;
 using SIS.WebServer.Routing;
 using System;
 
@@ -13,8 +11,6 @@ namespace CakeWebApp
         static void Main()
         {
             ServerRoutingTable serverRoutingTable = new ServerRoutingTable();
-            IHttpHandler httpHandler = new HttpHandler(serverRoutingTable);
-
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/"] = request => new HomeController().Index(request);
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/login"] = request => new AccountController().Login(request);
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/register"] = request => new AccountController().Register(request);
@@ -27,7 +23,7 @@ namespace CakeWebApp
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/logout"] = request => new AccountController().Logout(request);
             //serverRoutingTable.Routes[HttpRequestMethod.Get]["/hello"] = request => new HomeController().Hello(request);
 
-            Server server = new Server(80, httpHandler);
+            Server server = new Server(80, serverRoutingTable);
             server.Run();
         }
     }

@@ -3,22 +3,19 @@
     using IRunesWebApp.Controllers;
     using SIS.HTTP.Enums;
     using SIS.WebServer;
-    using SIS.WebServer.Api;
-    using SIS.WebServer.Api.Contracts;
     using SIS.WebServer.Results;
     using SIS.WebServer.Routing;
-    
+
     public class Program
     {
         public static void Main()
         {
             ServerRoutingTable serverRoutingTable = new ServerRoutingTable();
-            IHttpHandler httpHandler = new HttpHandler(serverRoutingTable); 
 
             InitializeGetMethods(serverRoutingTable);
             InitializePostMethods(serverRoutingTable);
 
-            Server server = new Server(80, httpHandler);
+            Server server = new Server(80, serverRoutingTable);
             server.Run();
         }
 
