@@ -58,7 +58,7 @@ namespace SIS.Framework.Routers
 
                 if (!attributes.Any() && requestMethod.ToUpper() == "GET")
                 {
-                    return methodInfo; 
+                    return methodInfo;
                 }
 
                 foreach (var attribute in attributes)
@@ -77,13 +77,13 @@ namespace SIS.Framework.Routers
         {
             if (controller == null)
             {
-                return new MethodInfo[0]; 
+                return new MethodInfo[0];
             }
 
             return controller
                 .GetType()
                 .GetMethods()
-                .Where(methodInfo => methodInfo.Name.ToLower() == actionName.ToLower()); 
+                .Where(methodInfo => methodInfo.Name.ToLower() == actionName.ToLower());
         }
 
         private IHttpResponse PrepareResponse(Controller controller, MethodInfo action)
@@ -93,15 +93,15 @@ namespace SIS.Framework.Routers
 
             if (actionResult is IViewable)
             {
-                return new HtmlResult(invocationResult, HttpResponseStatusCode.Ok); 
+                return new HtmlResult(invocationResult, HttpResponseStatusCode.Ok);
             }
             else if (actionResult is IRedirectable)
             {
-                return new RedirectResult(invocationResult); 
+                return new RedirectResult(invocationResult);
             }
             else
             {
-                throw new InvalidOperationException("The view result is not supported!"); 
+                throw new InvalidOperationException("The view result is not supported!");
             }
         }
 
@@ -131,7 +131,7 @@ namespace SIS.Framework.Routers
                 return new HttpResponse(HttpResponseStatusCode.NotFound);
             }
 
-            return this.PrepareResponse(controller, action); 
+            return this.PrepareResponse(controller, action);
         }
     }
 }
